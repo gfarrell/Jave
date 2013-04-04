@@ -48,8 +48,21 @@ define(function() {
     JaveApi.prototype.getAs = function(what, type, dflt) {
         var value = this.get(what, dflt);
 
-        switch(type) {
-            /* todo: type conversion */
+        switch(type.toLowerCase()) {
+            case "bool":
+            case "boolean":
+                value = !!value;
+                break;
+            case "int":
+            case "integer":
+                value = parseInt(value, 10);
+                break;
+            case "float":
+                value = parseFloat(value, 10);
+                break;
+            case "string":
+                value = "" + value;
+                break;
         }
 
         return value;
