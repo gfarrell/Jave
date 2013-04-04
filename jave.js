@@ -56,8 +56,8 @@ define(['jquery', 'jave_api'], function($, JaveAPI) {
      * @return {void}
      */
     jave.process = function($el) {
-        var applied_behaviours  = el.data('applied-behaviours'),
-            behaviours          = el.data('behaviour').split(' ');
+        var applied_behaviours  = $el.data('applied-behaviours'),
+            behaviours          = $el.data('behaviour').split(' ');
 
         if(typeof applied_behaviours != 'object') {
             applied_behaviours = [];
@@ -68,7 +68,7 @@ define(['jquery', 'jave_api'], function($, JaveAPI) {
                 $.jave.__makeBehave(b, el);
 
                 applied_behaviours.push(b);
-                el.data('applied-behaviours', applied_behaviours);
+                $el.data('applied-behaviours', applied_behaviours);
             }
         });
     };
