@@ -22,7 +22,7 @@ This will run Jave when the DOM has loaded, which will automatically apply any d
 
 * **selector** (string) defaults to "[data-behaviour]" *the selector to fetch elements with*
 * **auto** (bool) defaults to true *whether or not to run Jave automatically*
-* **root** (element) defaults to document.body **the root element to search in**
+* **root** (element) defaults to document.body *the root element to search in*
 
 If **auto** is set to false, then you will have to run `$.jave.run($root);` manually, optionally specifying a root element (otherwise Jave will use the configured default).
 
