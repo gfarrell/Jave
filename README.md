@@ -10,6 +10,22 @@ In short: Jave applies behaviour filters to bind javascript and DOM without addi
 Usage
 -----
 
+### Configuration
+
+Jave's module definition expects "jquery" to be defined and loadable. In order for Jave to run smoothly, you should add the following line into your `main.js` (or whatever you call it) application root.
+
+    $.ready(function() { $.jave(); });  // run on DOM ready
+
+This will run Jave when the DOM has loaded, which will automatically apply any defined behaviours to your elements. Jave takes some options:
+
+    $.jave(options);
+
+* **selector** (string) defaults to "[data-behaviour]" *the selector to fetch elements with*
+* **auto** (bool) defaults to true *whether or not to run Jave automatically*
+* **root** (element) defaults to document.body **the root element to search in**
+
+If **auto** is set to false, then you will have to run `$.jave.run($root);` manually, optionally specifying a root element (otherwise Jave will use the configured default).
+
 ### Defining behaviours
 
 A behaviour is basically a function that normally triggers the instantiation and attachment of other classes (but can contain anything really). Behaviours are defined using `$.jave.define`, for example:
