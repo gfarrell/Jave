@@ -14,7 +14,7 @@ define(['jquery', 'jave_api'], function($, JaveAPI) {
         if(this.options.auto) this.run();
     };
 
-    $.jave = jave;                      // define as an extension of jQuery
+    $.jave = jave;  // define as an extension of jQuery
 
     /**
      * Define a behaviour
