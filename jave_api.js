@@ -19,13 +19,23 @@ define(function() {
     };
 
     /**
+     * Retrieves a value from the element.
+     * @param  {string} key the key you want
+     * @return {mixed}      the value
+     */
+    JaveApi.prototype.__value = function(key) {
+        var val = this.$el.data(this._prefix + key);
+        return typeOf(val) == 'undefined' ? null : val;
+    };
+
+    /**
      * Gets an option.
      * @param  {string} what option name.
      * @param  {mixed}  dflt default value.
      * @return {mixed}       the value of the option.
      */
     JaveApi.prototype.get = function(what, dflt) {
-        var value = JSON.parse(this.$el.data(this._prefix+what));
+        var value = this.__value(what);
 
         if(value === null && this._options[what] !== undefined) {
             value = this._options[what];
