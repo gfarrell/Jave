@@ -6,6 +6,8 @@ define(['jquery', './jave_api'], function($, JaveAPI) {
             auto:     true
         };
 
+        this._behaviours = {};  // dictionary of behaviours
+
         /* todo: merge defaults */
     };
 
@@ -16,7 +18,15 @@ define(['jquery', './jave_api'], function($, JaveAPI) {
      * @return {void}
      */
     jave.define = function(name, fn) {
-        // todo: define a behaviour
+        if(typeof fn == 'function') {
+            if(!this._behaviours.hasOwnProperty(name)) {
+                this._behaviours[name] = fn;
+            } else {
+                throw new Error('Jave: behaviour "' + name + '" is already defined.');
+            }
+        } else {
+            throw new Error('Jave: behaviour definitions must be functions ("' + name + '").');
+        }
     };
 
     /**
