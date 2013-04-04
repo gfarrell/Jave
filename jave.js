@@ -34,6 +34,34 @@ define(['jquery', './jave_api'], function($, JaveAPI) {
      * @return {void}
      */
     jave.process = function($el) {
-        // todo: process an element, choose behaviour and apply it
+        var applied_behaviours  = el.data('applied-behaviours'),
+            behaviours          = el.data('behaviour').split(' ');
+
+        if(typeOf(applied_behaviours) != 'array') {
+            applied_behaviours = [];
+        }
+
+        $.each(behaviours, function(i, b) {
+            if(applied_behaviours.contains(b) !== true) {
+                $.jave.__makeBehave(b, el);
+
+                applied_behaviours.push(b);
+                el.data('applied-behaviours', applied_behaviours);
+            }
+        });
+    };
+
+    /**
+     * Make an element use a behaviour.
+     * @param  {jQuery} $el       the element in question.
+     * @param  {string} behaviour the behaviour name.
+     * @return {void}
+     */
+    jave.__makeBehave = function($el, behaviour) {
+        var api = new JaveAPI($el, behaviour);
+        if (!this._behaviours.hasOwnProperty(behaviour)) {
+            throw new Error('Jave: no such behaviour "' + behaviour + '" has been defined.');
+        }
+        this._behaviours[behaviour].call(this, $el, api);
     };
 });
