@@ -59,7 +59,7 @@ define(['jquery', 'jave_api'], function($, JaveAPI) {
         var applied_behaviours  = el.data('applied-behaviours'),
             behaviours          = el.data('behaviour').split(' ');
 
-        if(typeOf(applied_behaviours) != 'array') {
+        if(typeof applied_behaviours != 'object') {
             applied_behaviours = [];
         }
 
