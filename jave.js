@@ -65,7 +65,7 @@ define(['jquery', 'jave_api'], function($, JaveAPI) {
 
         $.each(behaviours, function(i, b) {
             if(applied_behaviours.contains(b) !== true) {
-                $.jave.__makeBehave(b, el);
+                $.jave.__makeBehave($el, b);
 
                 applied_behaviours.push(b);
                 $el.data('applied-behaviours', applied_behaviours);
