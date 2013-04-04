@@ -3,13 +3,18 @@ define(['jquery', './jave_api'], function($, JaveAPI) {
     jave       = function(options) {
         var defaults = {
             selector: '[data-behaviour]',
-            auto:     true
+            auto:     true,
+            root:     document.body
         };
 
         this._behaviours = {};  // dictionary of behaviours
 
-        /* todo: merge defaults */
+        this.options = $.merge(defaults, options);
+
+        if(this.options.auto) this.run();
     };
+
+    $.jave = jave;                      // define as an extension of jQuery
 
     /**
      * Define a behaviour
@@ -35,7 +40,14 @@ define(['jquery', './jave_api'], function($, JaveAPI) {
      * @return {void}
      */
     jave.run = function($root) {
-        // todo: run all behaviours
+        if($root === undefined || $root === null) {
+            $root = $(this.options.root);
+        } 
+
+        var children = $root.find(this.options.selector);
+        $.each(children, function(i, $el) {
+            $.jave.process($el);
+        });
     };
 
     /**
