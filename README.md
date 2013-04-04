@@ -81,7 +81,7 @@ Now, when the DOM is ready, my *validate* filter will be applied to all elements
 Prerequisites
 -------------
 
-Jave is defined as an AMD module, with [http://www.requirejs.org](require.js) in mind. You can remove the module definition to have it as a simple class file, but I would recommend leaving it as is and just getting to grips with require.js. Jave requires a JSON library of your choice (as long as `JSON.decode()` exists).
+Jave is defined as an AMD module, with [http://www.requirejs.org](require.js) in mind. You can remove the module definition to have it as a simple class file, but I would recommend leaving it as is and just getting to grips with require.js. Jave requires a JSON library of your choice (as long as `JSON.parse()` exists).
 
 It also requires jQuery, of course.
 

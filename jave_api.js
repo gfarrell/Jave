@@ -15,7 +15,7 @@ define(function() {
 
         this._prefix += '-';
 
-        this._options = JSON.decode(this.$el.data(this._prefix + 'options'));
+        this._options = JSON.parse(this.$el.data(this._prefix + 'options'));
     };
 
     /**
@@ -25,7 +25,7 @@ define(function() {
      * @return {mixed}       the value of the option.
      */
     JaveApi.prototype.get = function(what, dflt) {
-        var value = JSON.decode(this.$el.data(this._prefix+what));
+        var value = JSON.parse(this.$el.data(this._prefix+what));
 
         if(value === null && this._options[what] !== undefined) {
             value = this._options[what];
