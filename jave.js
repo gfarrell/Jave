@@ -1,4 +1,4 @@
-define(['jquery', './jave_api'], function($, JaveAPI) {
+define(['jquery', 'jave_api'], function($, JaveAPI) {
     var behaviours = {},
     jave       = function(options) {
         var defaults = {
