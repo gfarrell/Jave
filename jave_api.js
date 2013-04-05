@@ -7,7 +7,9 @@ define(function() {
      */
     var JaveApi = function($el, behaviour_name) {
         this.$el     = $el;
-        this._prefix = filter.hyphenate();
+        this._prefix = behaviour_name.replace(/(\s|_)/g, '-')
+                                     .replace(/([a-z])([A-Z])/g, '-')
+                                     .toLowerCase();
 
         if(this._prefix.substring(0, 1) == '-') {
             this._prefix = this._prefix.substring(1);
