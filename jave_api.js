@@ -6,6 +6,8 @@ define(function() {
      * @param {string} behaviour_name the name of the behaviour in question.
      */
     var JaveApi = function($el, behaviour_name) {
+        var opts;
+
         this.$el     = $el;
         this._prefix = behaviour_name.replace(/(\s|_)/g, '-')
                                      .replace(/([a-z])([A-Z])/g, '-')
@@ -17,7 +19,12 @@ define(function() {
 
         this._prefix += '-';
 
-        this._options = JSON.parse(this.$el.data(this._prefix + 'options'));
+        opts = this.$el.data(this._prefix + 'options');
+        if(!opts) {
+            opts = {};
+        } else {
+            opts = JSON.parse(opts);
+        }
     };
 
     /**
