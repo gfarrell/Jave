@@ -34,7 +34,7 @@ define(function() {
      */
     JaveApi.prototype.__value = function(key) {
         var val = this.$el.data(this._prefix + key);
-        return typeOf(val) == 'undefined' ? null : val;
+        return typeof(val) == 'undefined' ? null : val;
     };
 
     /**
