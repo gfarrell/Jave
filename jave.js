@@ -66,7 +66,7 @@ define(['jquery', 'jave_api'], function($, JaveAPI) {
             }
 
             $.each(behaviours, function(i, b) {
-                if(applied_behaviours.indexOf(b) !== -1) {
+                if(applied_behaviours.indexOf(b) == -1) {
                     $.jave.__makeBehave($el, b);
 
                     applied_behaviours.push(b);
