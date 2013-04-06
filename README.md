@@ -14,11 +14,11 @@ Usage
 
 Jave's module definition expects "jquery" to be defined and loadable. In order for Jave to run smoothly, you should add the following line into your `main.js` (or whatever you call it) application root.
 
-    $.ready(function() { $.jave(); });  // run on DOM ready
+    $.ready(function() { $.jave.init(); });  // run on DOM ready
 
 This will run Jave when the DOM has loaded, which will automatically apply any defined behaviours to your elements. Jave takes some options:
 
-    $.jave(options);
+    $.jave.init(options);
 
 * **selector** (string) defaults to "[data-behaviour]" *the selector to fetch elements with*
 * **auto** (bool) defaults to true *whether or not to run Jave automatically*
@@ -37,6 +37,10 @@ A behaviour is basically a function that normally triggers the instantiation and
 The first argument, the behaviour name, is the data-behaviour attribute that this behaviour will be associated with. The second argument is the behaviour itself.
 
 All behaviours should have the function signature `function($el, api)`. The first argument is just the jQuery'd element, but the second argument is an instance of the JaveAPI applied to this element.
+
+### Running Jave manually
+
+If you have added elements to the DOM and want to add behaviours to them (e.g. for externally loaded HTML) then you can easily run Jave again on either the whole `document.body` (which won't be as fast) or on the parent element. Jave stores a list of which behaviours have been applied to each element, so you don't have to worry about something getting duplicated.
 
 ### The JaveAPI object
 
@@ -64,6 +68,10 @@ In HTML:
 
         <button type="submit">Submit</button>
     </form>
+    
+Alternatively, all the options can be represented as a JSON string:
+
+	<input type="text" name="email" data-behaviour="validate" data-validate-options="{\"type\": \"email\",  \"required\": true}" />
 
 My behaviour definition:
 
