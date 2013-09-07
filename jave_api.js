@@ -10,7 +10,7 @@ define(function() {
 
         this.$el     = $el;
         this._prefix = behaviour_name.replace(/(\s|_)/g, '-')
-                                     .replace(/([a-z])([A-Z])/g, '-')
+                                     .replace(/([a-z])([A-Z])/g, '$1-$2')
                                      .toLowerCase();
 
         if(this._prefix.substring(0, 1) == '-') {
