@@ -96,4 +96,6 @@ define(['jquery', 'jave_api'], function($, JaveAPI) {
             $.jave.process($(this));
         }
     });
+
+    return $.jave;
 });
