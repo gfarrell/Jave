@@ -25,6 +25,7 @@ define(function() {
         } else {
             opts = JSON.parse(opts);
         }
+        this._options = opts;
     };
 
     /**
