@@ -1,4 +1,20 @@
-define(['jquery', 'jave_api'], function($, JaveAPI) {
+/* global define:true */
+var define;
+
+if (typeof module === 'object' && typeof define !== 'function') {
+    define = function (factory) {
+        'use strict';
+
+        module.exports = factory(require, exports, module);
+    };
+}
+
+define(function (require/*, exports, module*/) {
+    'use strict';
+
+    var $ = require('jquery');
+    var JaveAPI = require('./jave_api');
+
     $.jave = {
         /**
          * Dictionary of behaviours
@@ -13,9 +29,11 @@ define(['jquery', 'jave_api'], function($, JaveAPI) {
                 root:     document.body
             };
 
-            this.options = (typeof options == 'object') ? $.merge(defaults, options) : defaults;
+            this.options = (typeof options === 'object') ? $.merge(defaults, options) : defaults;
 
-            if(this.options.auto) this.run();
+            if(this.options.auto) {
+                this.run();
+            }
         },
 
         /**
@@ -25,7 +43,7 @@ define(['jquery', 'jave_api'], function($, JaveAPI) {
          * @return {void}
          */
         define: function(name, fn) {
-            if(typeof fn == 'function') {
+            if(typeof fn === 'function') {
                 if(!this._behaviours.hasOwnProperty(name)) {
                     this._behaviours[name] = fn;
                 } else {
@@ -42,11 +60,13 @@ define(['jquery', 'jave_api'], function($, JaveAPI) {
          * @return {void}
          */
         run: function($root) {
+            var children;
+
             if($root === undefined || $root === null) {
                 $root = $(this.options.root);
-            } 
+            }
 
-            var children = $root.find(this.options.selector);
+            children = $root.find(this.options.selector);
             $.each(children, function(i, el) {
                 $.jave.process($(el));
             });
@@ -58,19 +78,19 @@ define(['jquery', 'jave_api'], function($, JaveAPI) {
          * @return {void}
          */
         process: function($el) {
-            var applied_behaviours  = $el.data('applied-behaviours'),
+            var appliedBehaviours  = $el.data('applied-behaviours'),
                 behaviours          = $el.data('behaviour').split(' ');
 
-            if(typeof applied_behaviours != 'object') {
-                applied_behaviours = [];
+            if(typeof appliedBehaviours !== 'object') {
+                appliedBehaviours = [];
             }
 
             $.each(behaviours, function(i, b) {
-                if(applied_behaviours.indexOf(b) == -1) {
+                if(appliedBehaviours.indexOf(b) === -1) {
                     $.jave.__makeBehave($el, b);
 
-                    applied_behaviours.push(b);
-                    $el.data('applied-behaviours', applied_behaviours);
+                    appliedBehaviours.push(b);
+                    $el.data('applied-behaviours', appliedBehaviours);
                 }
             });
         },
