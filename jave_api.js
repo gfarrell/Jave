@@ -1,19 +1,30 @@
-define(function() {
+/* global define:true */
+var define;
+
+if (typeof module === 'object' && typeof define !== 'function') {
+    define = function (factory) {
+        'use strict';
+        module.exports = factory(require, exports, module);
+    };
+}
+
+define(function (/*require, exports, module*/) {
+    'use strict';
 
     /**
      * JaveApi Constructor
      * @param {jQuery} $el            the element being queried.
-     * @param {string} behaviour_name the name of the behaviour in question.
+     * @param {string} behaviourName the name of the behaviour in question.
      */
-    var JaveApi = function($el, behaviour_name) {
+    var JaveApi = function($el, behaviourName) {
         var opts;
 
         this.$el     = $el;
-        this._prefix = behaviour_name.replace(/(\s|_)/g, '-')
+        this._prefix = behaviourName.replace(/(\s|_)/g, '-')
                                      .replace(/([a-z])([A-Z])/g, '$1-$2')
                                      .toLowerCase();
 
-        if(this._prefix.substring(0, 1) == '-') {
+        if(this._prefix.substring(0, 1) === '-') {
             this._prefix = this._prefix.substring(1);
         }
 
@@ -35,7 +46,7 @@ define(function() {
      */
     JaveApi.prototype.__value = function(key) {
         var val = this.$el.data(this._prefix + key);
-        return typeof(val) == 'undefined' ? null : val;
+        return typeof val === 'undefined' ? null : val;
     };
 
     /**
@@ -51,7 +62,7 @@ define(function() {
             value = this._options[what];
         }
 
-        if(value === null && typeof dflt != 'undefined') {
+        if(value === null && typeof dflt !== 'undefined') {
             return dflt;
         } else {
             return value;
@@ -69,19 +80,19 @@ define(function() {
         var value = this.get(what, dflt);
 
         switch(type.toLowerCase()) {
-            case "bool":
-            case "boolean":
+            case 'bool':
+            case 'boolean':
                 value = !!value;
                 break;
-            case "int":
-            case "integer":
+            case 'int':
+            case 'integer':
                 value = parseInt(value, 10);
                 break;
-            case "float":
+            case 'float':
                 value = parseFloat(value, 10);
                 break;
-            case "string":
-                value = "" + value;
+            case 'string':
+                value = '' + value;
                 break;
         }
 
